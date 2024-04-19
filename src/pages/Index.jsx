@@ -5,6 +5,8 @@ import { useState } from "react";
 
 const Index = () => {
   const [file, setFile] = useState(null);
+  const [extractedText, setExtractedText] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -12,6 +14,26 @@ const Index = () => {
       setFile(file);
     }
   };
+  const extractText = () => {
+    setExtractedText("Extracted text from the PDF.");
+  };
+
+  const convertToWord = () => {
+    alert("Converted to Word format.");
+  };
+
+  const convertToExcel = () => {
+    alert("Converted to Excel format.");
+  };
+
+  const convertToHTML = () => {
+    alert("Converted to HTML format.");
+  };
+
+  const translateText = () => {
+    setTranslatedText("Translated text from the PDF.");
+  };
+
   return (
     <Container maxW="container.xl" p={5}>
       <VStack spacing={8} align="stretch">
@@ -29,22 +51,22 @@ const Index = () => {
 
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading mb={2}>Extracted Text</Heading>
-          <Textarea placeholder="Extracted text will appear here..." readOnly />
+          <Textarea value={extractedText} placeholder="Extracted text will appear here..." readOnly />
         </Box>
 
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading mb={2}>Convert & Translate</Heading>
           <VStack spacing={4}>
-            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid">
+            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid" onClick={convertToWord}>
               Convert to Word
             </Button>
-            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid">
+            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid" onClick={convertToExcel}>
               Convert to Excel
             </Button>
-            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid">
+            <Button leftIcon={<FaFilePdf />} colorScheme="purple" variant="solid" onClick={convertToHTML}>
               Convert to HTML
             </Button>
-            <Button leftIcon={<FaLanguage />} colorScheme="orange" variant="solid">
+            <Button leftIcon={<FaLanguage />} colorScheme="orange" variant="solid" onClick={translateText}>
               Translate Text
             </Button>
           </VStack>
