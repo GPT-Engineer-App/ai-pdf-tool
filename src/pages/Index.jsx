@@ -14,8 +14,33 @@ const Index = () => {
       setFile(file);
     }
   };
+  const extractPdfText = () => {
+    const pdfUrl = file ? URL.createObjectURL(file) : "";
+    const apiToken = "apify_api_tPg5PzZ9vFvCnQe5I05C1WpSmsxIWe2cNMsC";
+    const actorUrl = `https://api.apify.com/v2/acts/jirimoravcik~pdf-text-extractor/runs?token=${apiToken}`;
+
+    fetch(actorUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ urls: [pdfUrl] }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then((data) => {
+        console.log("Extraction started successfully!", data);
+        setExtractedText(data.message);
+      })
+      .catch((error) => console.error("Error starting extraction:", error));
+  };
+
   const extractText = () => {
-    setExtractedText("Extracted text from the PDF.");
+    extractPdfText();
   };
 
   const convertToWord = () => {
