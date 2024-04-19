@@ -1,8 +1,17 @@
 // AI-Powered PDF Extraction, Conversion, and Translation Tool on IPFS
 import { Box, Button, Container, Heading, Text, VStack, Image, Input, Textarea } from "@chakra-ui/react";
 import { FaFilePdf, FaLanguage, FaUpload } from "react-icons/fa";
+import { useState } from "react";
 
 const Index = () => {
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFile(file);
+    }
+  };
   return (
     <Container maxW="container.xl" p={5}>
       <VStack spacing={8} align="stretch">
@@ -15,9 +24,7 @@ const Index = () => {
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading mb={2}>Upload PDF</Heading>
           <Text mb={4}>Select a PDF file to extract text, convert and translate.</Text>
-          <Button leftIcon={<FaUpload />} colorScheme="teal" variant="solid">
-            Upload PDF
-          </Button>
+          <Input type="file" accept=".pdf" p={2} onChange={handleFileChange} placeholder="Upload PDF" size="lg" />
         </Box>
 
         <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
