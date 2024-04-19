@@ -34,7 +34,8 @@ const Index = () => {
       })
       .then((data) => {
         console.log("Extraction started successfully!", data);
-        setExtractedText(data.message);
+        // Assuming the actual text is in a field named 'extractedText' in the response
+        setExtractedText(data.extractedText);
       })
       .catch((error) => console.error("Error starting extraction:", error));
   };
